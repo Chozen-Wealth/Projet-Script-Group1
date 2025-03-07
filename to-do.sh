@@ -18,41 +18,33 @@ while true; do
             echo "Tâche ajoutée avec succès."
             ;;
        
-read -p "Choississez une option: " choix
+        2)
+            if [ ! -s tasks.txt ]; then
+                echo "La liste de tâche est vide."
+                return
+            fi
 
-case $choix in
-    1)
-        delete_task()
-        ;;
+            echo "Liste des tâches :"
+            nl -w2 -s'. ' tasks.txt
 
+            echo -n "Entrez le numéro de la tâche à supprimer : "
+            read numero_tache
 
+            if ! [[ "$numero_tache" =~ ^[0-9]+$ ]]; then
+                echo "Erreur : Veuillez entrer un numéro valide."
+                return
+            fi
 
-delete_task() {
-    if [ ! -s tasks.txt ]; then
-        echo "La liste de tâche est vide."
-        return
-    fi
+            if [ "numero_tache" -le 0 ] || [ "numero_tache" -gt "$wc -1 < tasks.txt" ]; then
+                echo "Erreur : Numéro invalide."
+                return
+            fi
 
-    echo "Liste des tâches :"
-    nl -w2 -s'. ' tasks.txt
-
-    echo -n "Entrez le numéro de la tâche à supprimer : "
-    read numero_tache
-
-    if ! [[ "$numero_tache" =~ ^[0-9]+$ ]]; then
-        echo "Erreur : Veuillez entrer un numéro valide."
-        return
-    fi
-
-    if [ "numero_tache" -le 0 ] || [ "numero_tache" -gt "$wc -1 < tasks.txt" ]; then
-        echo "Erreur : Numéro invalide."
-        return
-    fi
-
-    sed -i "${numero_tache}d" tasks.txt
-    echo "Tâche supprimée avec succès."
-}
-
+            sed -i "${numero_tache}d" tasks.txt
+            echo "Tâche supprimée avec succès."
+                    ;;
+    esac
+done
 
 
     
