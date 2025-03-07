@@ -21,7 +21,7 @@ while true; do
         2)
             if [ ! -s tasks.txt ]; then
                 echo "La liste de tâche est vide."
-                return
+                continue
             fi
 
             echo "Liste des tâches :"
@@ -32,12 +32,13 @@ while true; do
 
             if ! [[ "$numero_tache" =~ ^[0-9]+$ ]]; then
                 echo "Erreur : Veuillez entrer un numéro valide."
-                return
+                continue
             fi
 
-            if [ "numero_tache" -le 0 ] || [ "numero_tache" -gt "$wc -1 < tasks.txt" ]; then
+            total_taches=$(wc -l < tasks.txt)
+            if [ "$numero_tache" -le 0 ] || [ "$numero_tache" -gt "$total_taches" ]; then
                 echo "Erreur : Numéro invalide."
-                return
+                continue
             fi
 
             sed -i "${numero_tache}d" tasks.txt
