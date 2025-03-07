@@ -20,6 +20,9 @@ delete_task() {
         echo "La liste de tâche est vide."
         return
     fi
+
+    echo "Liste des tâches :"
+    nl -w2 -s'. ' tasks.txt
 }
 
 
