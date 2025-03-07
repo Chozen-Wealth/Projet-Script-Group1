@@ -1,22 +1,65 @@
-        4)  
-            echo "Option Supprimer une tâche sélectionnée."  
-            # Vérifier s'il y a des tâches dans tasks.txt
-            if [[ ! -s tasks.txt ]]; then  
-                echo "Aucune tâche à supprimer."  
-            else  
-                echo "Voici la liste des tâches :"
-                nl tasks.txt  # Affiche les tâches avec un numéro
-                read -p "Entrez le numéro de la tâche à supprimer : " num_tache
+ #!/bin/bash
 
-                # Vérifier si la tâche existe
-                if sed -n "${num_tache}p" tasks.txt >/dev/null; then
-                    # Supprimer la tâche sélectionnée
-                    sed -i "${num_tache}d" tasks.txt
-                    echo "Tâche supprimée."
-                else
-                    echo "Tâche invalide, numéro introuvable."
-                fi
+tache="tasks.txt"
+echo "Bienvenue dans ta to-do list."
+while true; do
+    
+    echo "1) Ajouter une tâche."
+    echo "2) Supprimer une tâche."
+    echo "3) Afficher une tâche."
+    echo "4) Quitter."
+
+    read -p "Choississez une option: " choix
+
+    case $choix in
+        1)  
+            read -p "Entrez la description de la tâche : " task
+            echo "$task" >> "$tache"
+            echo "Tâche ajoutée avec succès."
+            ;;
+       
+        2)
+            if [ ! -s tasks.txt ]; then
+                echo "La liste de tâche est vide."
+                continue
             fi
-            ;;  
+
+            echo "Liste des tâches :"
+            nl -w2 -s'. ' tasks.txt
+
+            echo -n "Entrez le numéro de la tâche à supprimer : "
+            read numero_tache
+
+            if ! [[ "$numero_tache" =~ ^[0-9]+$ ]]; then
+                echo "Erreur : Veuillez entrer un numéro valide."
+                continue
+            fi
+
+            total_taches=$(wc -l < tasks.txt)
+            if [ "$numero_tache" -le 0 ] || [ "$numero_tache" -gt "$total_taches" ]; then
+                echo "Erreur : Numéro invalide."
+                continue
+            fi
+
+            sed -i "${numero_tache}d" tasks.txt
+            echo "Tâche supprimée avec succès."
+            ;;
+
+
+    
+
+        3)
+            if [ ! -s tasks.txt ]; then
+                echo "Aucune tâche à afficher."
+            else
+                cat -n tasks.txt
+            fi
+            ;;
+ 
+        4)
+        echo "Au revoir !"
+        exit 0
+        ;;
      esac
-done  
+done 
+ 
