@@ -36,6 +36,9 @@ delete_task() {
         echo "Erreur : Numéro invalide."
         return
     fi
+
+    sed -i "${numero_tache}d" tasks.txt
+    echo "Tâche supprimée avec succès."
 }
 
 
