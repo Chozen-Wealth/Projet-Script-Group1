@@ -17,8 +17,4 @@ while true; do
             echo "$task" >> "$tache"
             echo "Tâche ajoutée avec succès."
             ;;
-        *)
-            echo "option invalide"
-            ;;
-    esac
-do
+       
