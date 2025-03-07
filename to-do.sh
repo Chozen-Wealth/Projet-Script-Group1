@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tache="taskt.txt"
+tache="tasks.txt"
 echo "Bienvenue dans ta to-do list."
 while true; do
     
