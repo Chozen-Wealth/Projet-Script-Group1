@@ -10,7 +10,7 @@ while true; do
     echo "4) Quitter."
 
     read -p "Choississez une option: " choix
-
+# le >> permet d'ajouter la tache sur le fichier text sans ecraser le contenu ou un créer un nouveau a chaque fois
     case $choix in
         1)  
             read -p "Entrez la description de la tâche : " task
