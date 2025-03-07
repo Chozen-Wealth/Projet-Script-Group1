@@ -1,2 +1,5 @@
 dormir 
 bien manger 
+lecture
+code
+sport
