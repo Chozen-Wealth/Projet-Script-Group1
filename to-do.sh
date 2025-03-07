@@ -1,3 +1,4 @@
+#!/bin/bash
 3)
     if [ ! -s tasks.txt ]; then
         echo "Aucune tâche à afficher."
