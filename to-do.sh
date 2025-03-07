@@ -20,25 +20,6 @@ delete_task() {
         echo "La liste de tâche est vide."
         return
     fi
-
-    echo "Liste des tâches :"
-    nl -w2 -s'. ' tasks.txt
-
-    echo -n "Entrez le numéro de la tâche à supprimer : "
-    read numero_tache
-
-    if ! [[ "$numero_tache" =~ ^[0-9]+$ ]]; then
-        echo "Erreur : Veuillez entrer un numéro valide."
-        return
-    fi
-
-    if [ "numero_tache" -le 0 ] || [ "numero_tache" -gt "$wc -1 < tasks.txt" ]; then
-        echo "Erreur : Numéro invalide."
-        return
-    fi
-
-    sed -i "${numero_tache}d" tasks.txt
-    echo "Tâche supprimée avec succès."
 }
 
 
