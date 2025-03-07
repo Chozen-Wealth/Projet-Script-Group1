@@ -23,6 +23,9 @@ delete_task() {
 
     echo "Liste des tâches :"
     nl -w2 -s'. ' tasks.txt
+
+    echo -n "Entrez le numéro de la tâche à supprimer : "
+    read numero_tache
 }
 
 
