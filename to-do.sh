@@ -42,7 +42,7 @@ while true; do
 
             sed -i "${numero_tache}d" tasks.txt
             echo "Tâche supprimée avec succès."
-                    ;;
+            ;;
     esac
 done
 
