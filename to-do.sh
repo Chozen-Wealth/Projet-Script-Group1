@@ -26,6 +26,11 @@ delete_task() {
 
     echo -n "Entrez le numéro de la tâche à supprimer : "
     read numero_tache
+    
+    if ! [[ "$numero_tache" =~ ^[0-9]+$ ]]; then
+        echo "Erreur : Veuillez entrer un numéro valide."
+        return
+    fi
 }
 
 
