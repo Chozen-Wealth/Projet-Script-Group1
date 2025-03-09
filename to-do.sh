@@ -6,8 +6,10 @@ while true; do
 
     echo "1) Ajouter une tâche."
     echo "2) Supprimer une tâche."
-    echo "3) Afficher une tâche."
-    echo "4) Quitter."
+    echo "3) Afficher la liste des tâches."
+    echo "4) Modifier une tâche."
+    echo "5) Effacer toutes les tâches."
+    echo "6) Quitter."
 
     read -p "Choississez une option: " choix
 # le >> permet d'ajouter la tache sur le fichier text sans ecraser le contenu ou en créer un nouveau a chaque fois
@@ -53,10 +55,33 @@ while true; do
                 cat -n tasks.txt
             fi
             ;;
- 
+
         4)
-            echo "Au revoir !"
-            exit 0
+            if [ ! -s tasks.txt ]; then # on verifie si le fichier est vide
+                echo "Aucune tâche à afficher." # si oui on affiche ce message
+            else 
+                cat -n tasks.txt # sinon on affiche la liste des taches
+            fi
+            echo "Entrez le numéro de la tâche à modifier :"
+            read numero_tache # on demande a l'utilisateur de saisir le numero de la tache a modifier
+            echo "Nouvelle description :" # on demande a l'utilisateur de saisir la nouvelle description de la tache
+            read new_task # on stocke la valeur saisie dans la variable new_task
+            sed -i "${numero_tache}s/.*/$new_task/" "$tache" 2>/dev/null && echo "Tâche modifiée !" || echo "Numéro invalide." # on modifie la tache et on gère les erreurs.
+            ;;
+
+
+        5)
+            > "$tache" # on efface toutes les taches du fichier tasks.txt
+            echo "Toutes les tâches ont été effacées."
+            ;;
+
+        6) 
+            echo "Au revoir !" # on affiche ce message si l'utilisateur choisit l'option 6
+            exit 0 # on quitte le programme
+            ;;
+
+        *) 
+            echo "Option invalide. Veuillez réessayer." # si l'utilisateur saisit une option invalide on affiche le message en dessous
             ;;
      esac
 done 
